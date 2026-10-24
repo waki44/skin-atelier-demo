@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Skin Atelier — Skin, Science, Confidence | Islamabad</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:#2b2622;background:#faf7f2;line-height:1.65}
+  .topbar{background:#221d19;color:#d8c9b4;font-size:12.5px;letter-spacing:.4px;padding:9px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  header{background:#faf7f2;padding:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:1px solid #e8dfd3}
+  .logo{font-family:Georgia,serif;font-size:24px;font-weight:400;letter-spacing:1px;color:#221d19}
+  .logo em{font-style:italic;color:#a9854d}
+  nav a{margin:0 11px;color:#6b5f52;text-decoration:none;font-size:14px}
+  .callbtn{border:1px solid #221d19;color:#221d19;padding:10px 20px;border-radius:30px;text-decoration:none;font-size:13.5px;letter-spacing:.3px}
+  .hero{padding:74px 20px;text-align:center;max-width:820px;margin:0 auto}
+  .hero .eyebrow{letter-spacing:3px;font-size:12px;color:#a9854d;text-transform:uppercase;margin-bottom:18px}
+  .hero h1{font-family:Georgia,serif;font-weight:400;font-size:48px;line-height:1.15;margin-bottom:18px}
+  .hero h1 em{font-style:italic;color:#a9854d}
+  .hero p{color:#6b5f52;font-size:17px;max-width:620px;margin:0 auto 28px}
+  .hero a{background:#221d19;color:#f5efe6;padding:14px 30px;border-radius:30px;text-decoration:none;font-size:14px;letter-spacing:.3px}
+  .rating{margin-top:22px;color:#6b5f52;font-size:14px}
+  .wrap{max-width:1060px;margin:0 auto;padding:48px 20px}
+  h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin-bottom:8px}
+  .sub{color:#6b5f52;margin-bottom:28px;max-width:640px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .card{background:#fff;border:1px solid #ece3d6;border-radius:14px;padding:24px}
+  .card h3{font-family:Georgia,serif;font-weight:400;font-size:19px;margin-bottom:6px}
+  .card p{color:#6b5f52;font-size:14px}
+  .price{color:#a9854d;font-weight:700;font-size:14px;margin-top:10px}
+  .concerns{background:#221d19;color:#f5efe6;border-radius:22px;padding:36px}
+  .concerns h2{color:#fff}
+  .concerns .sub{color:#c9bca8}
+  .concern{background:#2e2822;border:1px solid #453c32;border-radius:14px;padding:20px}
+  .concern h3{font-family:Georgia,serif;font-weight:400;color:#f5efe6;margin-bottom:4px}
+  .concern p{color:#c9bca8;font-size:14px}
+  .pkg{background:#fff;border:1px solid #e8cfa8;border-radius:16px;padding:26px;position:relative}
+  .pkg .old{color:#9a8a76;text-decoration:line-through;font-size:14px}
+  .pkg .new{font-family:Georgia,serif;font-size:26px;color:#221d19}
+  .doc{display:flex;gap:20px;align-items:flex-start;background:#fff;border:1px solid #ece3d6;border-radius:16px;padding:28px}
+  .avatar{width:72px;height:72px;border-radius:50%;background:#a9854d;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:26px;flex-shrink:0}
+  .visit{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;border-top:1px solid #e8dfd3;padding-top:28px}
+  .visit h3{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#a9854d;margin-bottom:6px}
+  .visit p{color:#4a423a;font-size:14px}
+  footer{text-align:center;color:#9a8a76;font-size:13px;padding:26px}
+  #chatBtn{position:fixed;right:22px;bottom:22px;z-index:50;background:#221d19;color:#f5efe6;border:none;border-radius:50px;padding:15px 22px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px rgba(34,29,25,.35);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 10px 30px rgba(34,29,25,.35)}50%{box-shadow:0 10px 34px rgba(169,133,77,.6)}100%{box-shadow:0 10px 30px rgba(34,29,25,.35)}}
+  #chatPanel{position:fixed;right:22px;bottom:92px;z-index:50;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:#fff;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.25);display:none;flex-direction:column;overflow:hidden}
+  #chatPanel.open{display:flex}
+  .chatHead{background:#221d19;color:#f5efe6;padding:16px 18px}
+  .chatHead b{font-family:Georgia,serif;font-weight:400;font-size:17px}
+  .chatHead span{font-size:12px;color:#c9bca8;display:block;margin-top:2px}
+  #chatBody{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#faf7f2}
+  .msg{max-width:85%;padding:11px 14px;border-radius:16px;font-size:14px;line-height:1.5}
+  .msg.bot{background:#fff;border:1px solid #ece3d6;align-self:flex-start;border-bottom-left-radius:4px}
+  .msg.user{background:#221d19;color:#f5efe6;align-self:flex-end;border-bottom-right-radius:4px}
+  .lead{background:#fdf6e8;border:1px solid #e8cfa8;border-radius:14px;padding:14px;font-size:14px;align-self:stretch}
+  .lead b{color:#221d19}
+  #chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;border-top:1px solid #ece3d6;background:#fff}
+  #chips button{background:#f3ede3;border:1px solid #e2d6c2;color:#221d19;border-radius:20px;padding:7px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .chatInput{display:flex;border-top:1px solid #ece3d6}
+  .chatInput input{flex:1;border:none;padding:14px;font-size:14px;outline:none}
+  .chatInput button{background:#a9854d;border:none;padding:0 20px;font-weight:700;cursor:pointer;color:#fff}
+  @media(max-width:600px){.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="topbar"><span>F-11 MARKAZ, ISLAMABAD</span><span>MON – SAT &nbsp; 1:00 PM – 8:00 PM &nbsp;&middot;&nbsp; SUNDAY CLOSED</span></div>
+<header>
+  <div class="logo">THE SKIN <em>ATELIER</em></div>
+  <nav><a href="#concerns">Concerns</a><a href="#treatments">Treatments</a><a href="#packages">Programmes</a><a href="#doctor">Our Doctor</a></nav>
+  <a class="callbtn" href="tel:+923375977799">+92 337 5977799</a>
+</header>
+<section class="hero">
+  <div class="eyebrow">Skin &middot; Science &middot; Confidence</div>
+  <h1>A quieter kind of <em>aesthetic medicine.</em></h1>
+  <p>Every plan starts with a diagnosis. Every treatment has to earn its place — and sometimes, the honest answer is that you do not need one at all.</p>
+  <a href="#concerns">Start With Your Concern</a>
+  <div class="rating">Rated 4.9 / 5 by our patients &middot; Medically led, consultation first</div>
+</section>
+<div class="wrap concerns" id="concerns">
+  <h2>What are you looking to improve?</h2>
+  <p class="sub">Choose a concern — the assistant below will guide you to the treatments most often used for it, and to a consultation.</p>
+  <div class="grid">
+    <div class="concern"><h3>Fine lines &amp; wrinkles</h3><p>Botox, skin boosters, thread lifts</p></div>
+    <div class="concern"><h3>Dull skin, glow</h3><p>HydraFacial, Carbon Laser, skin rejuvenation</p></div>
+    <div class="concern"><h3>Acne &amp; acne scars</h3><p>Acne programme, microneedling, chemical peels</p></div>
+    <div class="concern"><h3>Pigmentation</h3><p>Pico laser, Q-Switch laser, meso treatments</p></div>
+    <div class="concern"><h3>Hair loss</h3><p>PRP therapy, hair restoration plan</p></div>
+    <div class="concern"><h3>Unwanted hair</h3><p>Laser hair removal, planned for your skin type</p></div>
+  </div>
+</div>
+<div class="wrap" id="treatments">
+  <h2>Considered treatments, delivered properly.</h2>
+  <p class="sub">A focused menu. Each one begins with an assessment — not a price list. Prices shown are indicative starting points.</p>
+  <div class="grid">
+    <div class="card"><h3>Botox</h3><p>Refined muscle relaxant treatment that softens expression lines while keeping your face expressive.</p><div class="price">From PKR 25,000</div></div>
+    <div class="card"><h3>Dermal Fillers</h3><p>Hyaluronic acid fillers that restore volume and definition, with an emphasis on balance.</p><div class="price">From PKR 20,000</div></div>
+    <div class="card"><h3>HydraFacial</h3><p>Medical-grade resurfacing facial that cleanses, extracts and hydrates in a single session.</p><div class="price">From PKR 5,000</div></div>
+    <div class="card"><h3>Carbon Laser</h3><p>The Hollywood Peel — deep cleansing, pore refinement and instant glow.</p><div class="price">From PKR 15,000</div></div>
+    <div class="card"><h3>Pico Laser</h3><p>Picosecond pulses that break pigment into finer particles, with less heat than older devices.</p><div class="price">From PKR 10,000</div></div>
+    <div class="card"><h3>Microneedling</h3><p>Controlled micro-injury that prompts your skin to rebuild collagen.</p><div class="price">From PKR 12,000</div></div>
+    <div class="card"><h3>PRP Therapy</h3><p>Platelet-rich plasma from your own blood, for skin and scalp repair.</p><div class="price">From PKR 8,000</div></div>
+    <div class="card"><h3>IV Drips</h3><p>Intravenous vitamin and antioxidant infusions, given after bloodwork — not on request.</p><div class="price">From PKR 15,000</div></div>
+  </div>
+  <p class="sub" style="margin-top:16px">Many treatments — laser hair removal, Q-Switch, HIFU, thread lifts, PDRN and exosomes — are priced on consultation, after your assessment.</p>
+</div>
+<div class="wrap" id="packages">
+  <h2>Courses, priced as courses.</h2>
+  <p class="sub">Where a treatment is naturally delivered over several sessions, a programme costs less than booking each one individually.</p>
+  <div class="grid">
+    <div class="pkg"><h3>Bridal Glow</h3><p style="color:#6b5f52;font-size:14px">A structured programme beginning three months before the wedding — HydraFacial &times;3, Chemical Peels &times;2, Skin Boosters &times;1.</p><div style="margin-top:12px"><span class="old">PKR 108,000</span><br><span class="new">PKR 85,000</span></div></div>
+    <div class="pkg"><h3>Skin Rejuvenation Programme</h3><p style="color:#6b5f52;font-size:14px">Six treatments combining collagen stimulation and resurfacing — Microneedling &times;3, HydraFacial &times;3.</p><div style="margin-top:12px"><span class="old">PKR 99,000</span><br><span class="new">PKR 78,000</span></div></div>
+    <div class="pkg"><h3>Acne Recovery</h3><p style="color:#6b5f52;font-size:14px">Three months of combined in-clinic and prescription care, with review built in at the six-week mark.</p><div style="margin-top:12px"><span class="old">PKR 72,000</span><br><span class="new">PKR 55,000</span></div></div>
+  </div>
+</div>
+<div class="wrap" id="doctor">
+  <div class="doc"><div class="avatar">MA</div><div><h2 style="margin-bottom:4px">Dr. Maria Aslam</h2><p style="color:#6b5f52">Consultant Dermatologist — MBBS, FCPS (Dermatology). Every treatment here is planned and delivered by her personally. There are no handovers to a second practitioner, and no treatment is booked before an assessment has been done.</p></div></div>
+  <div class="visit" style="margin-top:32px">
+    <div><h3>Visit</h3><p>Office 3, Bizzon Plaza, F-11 Markaz, Islamabad</p></div>
+    <div><h3>Call</h3><p>+92 337 5977799</p></div>
+    <div><h3>Email</h3><p>theskinatelier01@gmail.com</p></div>
+    <div><h3>Hours</h3><p>Monday – Saturday, 1:00 – 8:00 PM. Sunday closed.</p></div>
+  </div>
+</div>
+<footer>The Skin Atelier, F-11 Markaz, Islamabad &middot; This is a live preview of how a chat assistant would work on the clinic website.</footer>
+
+<button id="chatBtn" onclick="toggleChat()">Chat with The Skin Atelier</button>
+<div id="chatPanel">
+  <div class="chatHead"><b>The Skin Atelier Assistant</b><span>Replies instantly &middot; consultation first, always</span></div>
+  <div id="chatBody"></div>
+  <div id="chips"></div>
+  <div class="chatInput"><input id="chatInput" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendMsg()"><button onclick="sendMsg()">Send</button></div>
+</div>
+<script>
+var body=document.getElementById('chatBody'), chips=document.getElementById('chips'), input=document.getElementById('chatInput');
+var step=null, lead={};
+var mainChips=['My skin concern','Treatment prices','Our programmes','Book a consultation','Timings & location'];
+function toggleChat(){var p=document.getElementById('chatPanel');p.classList.toggle('open');if(p.classList.contains('open')&&!body.children.length){welcome();}}
+function welcome(){bot('Welcome to The Skin Atelier. Before anything else — every plan here starts with a consultation and an assessment, never with a treatment booked blind. Tell me your concern, and I will guide you to the right options and a consultation.');setChips(mainChips);}
+function bot(t){var d=document.createElement('div');d.className='msg bot';d.textContent=t;body.appendChild(d);body.scrollTop=body.scrollHeight;}
+function user(t){var d=document.createElement('div');d.className='msg user';d.textContent=t;body.appendChild(d);body.scrollTop=body.scrollHeight;}
+function setChips(list){chips.innerHTML='';list.forEach(function(c){var b=document.createElement('button');b.textContent=c;b.onclick=function(){sendMsg(c);};chips.appendChild(b);});}
+function sendMsg(preset){var t=preset||input.value.trim();if(!t)return;input.value='';user(t);setTimeout(function(){handle(t);},350);}
+function ask(q,ch){bot(q);if(ch)setChips(ch);}
+function finishLead(){
+  var d=document.createElement('div');d.className='lead';
+  d.innerHTML='<b>Consultation request saved — Ref SA-001</b><br>Concern: '+lead.service+'<br>Name: '+lead.name+'<br>Phone: '+lead.phone+'<br>Preferred day: '+lead.day+'<br><br>Our team will call you on '+lead.phone+' to confirm your consultation. Please note: no treatment is booked before your assessment.';
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
+  step=null;lead={};setChips(mainChips);
+}
+function handle(raw){
+  var t=raw.toLowerCase();
+  if(step==='service'){lead.service=raw;step='name';ask('Thank you. What is your name?',[]);return;}
+  if(step==='name'){lead.name=raw;step='phone';ask('And your phone number, so our team can call you to confirm?',[]);return;}
+  if(step==='phone'){lead.phone=raw;step='day';ask('Which day would you prefer? We are open Monday to Saturday, 1:00 – 8:00 PM.',[]);return;}
+  if(step==='day'){lead.day=raw;finishLead();return;}
+  if(t.indexOf('book')>-1||t.indexOf('consultation')>-1||t.indexOf('appointment')>-1){step='service';ask('With pleasure. What is your main concern? For example: wrinkles, dull skin, acne, pigmentation, hair loss — or anything else.',[]);return;}
+  if(t.indexOf('concern')>-1||t.indexOf('skin')>-1){bot('Tell me a little more — is it fine lines, dullness, acne or acne scars, pigmentation, hair loss, or unwanted hair? Each concern maps to different treatments, and the final plan is always decided at your consultation.');setChips(['Wrinkles','Dull skin / glow','Acne','Pigmentation','Hair loss','Book a consultation']);return;}
+  if(t.indexOf('wrinkle')>-1||t.indexOf('fine line')>-1||t.indexOf('aging')>-1||t.indexOf('ageing')>-1){bot('For fine lines and wrinkles, the treatments most often used here are Botox (from PKR 25,000), Skin Boosters (from PKR 30,000) and Thread Lifts (priced on consultation). The right one depends on your assessment — shall I save a consultation request?');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('dull')>-1||t.indexOf('glow')>-1||t.indexOf('bright')>-1){bot('For glow and dull skin, HydraFacial (from PKR 5,000) and Carbon Laser (from PKR 15,000) are the usual starting points, or the Skin Rejuvenation Programme at PKR 78,000 for a full six-treatment course. A consultation will confirm what suits your skin.');setChips(['Book a consultation','Our programmes']);return;}
+  if(t.indexOf('acne')>-1||t.indexOf('scar')>-1){bot('For acne and acne scars, we offer medically led acne management, Microneedling (from PKR 12,000) and Chemical Peels (from PKR 12,000). The Acne Recovery programme — three months of in-clinic and prescription care — is PKR 55,000. Your plan is set after assessment.');setChips(['Book a consultation','Our programmes']);return;}
+  if(t.indexOf('pigment')>-1||t.indexOf('melasma')>-1||t.indexOf('dark spot')>-1){bot('For pigmentation, Pico Laser (from PKR 10,000), Q-Switch Laser and Meso Treatments (from PKR 8,000) are most often used. Because pigment has many causes, the exact plan is decided after your skin is examined.');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('hair loss')>-1||t.indexOf('hair fall')>-1||t.indexOf('bald')>-1){bot('For hair loss, PRP Therapy (from PKR 8,000) and a medical Hair Restoration plan combining PRP, mesotherapy and prescription care are offered. A consultation first assesses the cause of the loss.');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('laser hair')>-1||t.indexOf('unwanted hair')>-1){bot('Laser Hair Removal is offered here, with wavelengths selected for your skin tone and hair type, and priced on consultation after assessment.');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('price')>-1||t.indexOf('cost')>-1||t.indexOf('charge')>-1){bot('Indicative starting prices: Botox from PKR 25,000, Fillers from PKR 20,000, HydraFacial from PKR 5,000, Carbon Laser from PKR 15,000, Pico Laser from PKR 10,000, Microneedling from PKR 12,000, PRP from PKR 8,000, IV Drips from PKR 15,000. Several treatments are priced on consultation, because your plan is built around your skin at assessment.');setChips(['Book a consultation','Our programmes']);return;}
+  if(t.indexOf('programme')>-1||t.indexOf('program')>-1||t.indexOf('package')>-1||t.indexOf('bridal')>-1){bot('Our programmes: Bridal Glow PKR 85,000 (was PKR 108,000), Skin Rejuvenation Programme PKR 78,000 (was PKR 99,000), and Acne Recovery PKR 55,000 (was PKR 72,000). Each is a structured multi-session course, not a single sitting.');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('doctor')>-1||t.indexOf('maria')>-1){bot('You will meet Dr. Maria Aslam, Consultant Dermatologist (MBBS, FCPS Dermatology). She plans and delivers every treatment personally — there are no handovers to a second practitioner.');setChips(['Book a consultation','Timings & location']);return;}
+  if(t.indexOf('timing')>-1||t.indexOf('hours')>-1||t.indexOf('open')>-1||t.indexOf('location')>-1||t.indexOf('address')>-1||t.indexOf('where')>-1){bot('We are at Office 3, Bizzon Plaza, F-11 Markaz, Islamabad. Hours: Monday to Saturday, 1:00 – 8:00 PM. Sunday closed. Call us at +92 337 5977799.');setChips(['Book a consultation','Treatment prices']);return;}
+  if(t.indexOf('hello')>-1||t.indexOf('hi')>-1||t.indexOf('salam')>-1){bot('Hello, and welcome. What is your main skin concern today?');setChips(mainChips);return;}
+  bot('I do not have that answer yet, and I will not guess — this clinic is honest about what it does not know before an assessment. Book a consultation and Dr. Maria Aslam’s team will answer it properly.');setChips(['Book a consultation','My skin concern','Timings & location']);
+}
+</script>
+</body>
+</html>
